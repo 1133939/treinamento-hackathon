@@ -1,0 +1,41 @@
+<app-topo></app-topo>
+<div class="espaco-button">
+<button type="button" class="btn btn-primary" (click)="randomPersonagens()">Randomizar dois Personagens</button>
+</div>
+<div *ngIf="duelo.personagens != null">
+<table class="table table-dark">
+        <thead>
+          <tr>
+            <th scope="col">Nome</th>
+            <th scope="col">Alinhamento</th>
+            <th scope="col">Inteligência</th>
+            <th scope="col">Força</th>
+            <th scope="col">Destreza</th>
+            <th scope="col">Poder</th>
+            <th scope="col">Combate</th>
+            <th scope="col">Defesa</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let personagem of duelo.personagens">
+            <th scope="row">{{personagem.nome}}</th>
+            <td>{{personagem.alinhamento}}</td>
+            <td>{{personagem.inteligencia}}</td>
+            <td>{{personagem.forca}}</td>
+            <td>{{personagem.destreza}}</td>
+            <td>{{personagem.poder}}</td>
+            <td>{{personagem.combate}}</td>
+            <td>{{personagem.defesa}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+<div class="espaco-button" *ngIf="randomPersonagem">
+<button type="button" class="btn btn-info" (click)="getHabilidade()">Randomizar Habilidade</button>
+</div>
+<p class="lead" *ngIf="mostrarHabilidade">Habilidade: {{duelo.atributo}}</p>
+<div class="espaco-button" *ngIf="mostrarHabilidade">
+<button type="button" class="btn btn-warning" (click)="getVencedor()">Duelar!</button>
+</div>
+<p class="lead" *ngIf="personagemVitorioso !=undefined">Vencedor: {{personagemVitorioso.nome}}</p>
+<br>

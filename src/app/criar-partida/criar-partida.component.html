@@ -1,0 +1,61 @@
+<app-topo></app-topo>
+<div class="espaco-button" *ngIf="partida.duelos == null">
+        <button type="button" class="btn btn-info" (click)="fazerJogada()">Iniciar Partida</button>
+</div>
+<div class="espaco-button" *ngIf="partida.duelos != null">
+        <button type="button" class="btn btn-info" (click)="fazerJogada()">Próximo Duelo</button>
+        <button *ngIf="criarMutanteBoolean" type="button" class="btn btn-warning" (click)="criarMutante()">Criar Mutante</button>
+    </div>
+
+<table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Champion</th>
+            <th scope="col">Challenger</th>
+            <th scope="col">Skill</th>
+            <th scope="col">Winner</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let duelo of partida.duelos; let i = index">
+            <th scope="row">{{i+1}}</th>
+            <td *ngFor="let p of duelo.personagens">{{p.nome}}</td>
+            <td>{{duelo.atributo}}</td>
+            <td>{{duelo.personagemVitorioso.nome}}</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="mx-auto" *ngIf="mutante.nome!=null">
+            <p class="lead">Você criou um HEROI MUTANTEEE !!!!!!!</p>
+           
+            <table class="table table-dark">
+                    <thead>
+                      <tr>
+                        <th scope="col">Nome</th>
+                        <th scope="col">Alinhamento</th>
+                        <th scope="col">Inteligência</th>
+                        <th scope="col">Força</th>
+                        <th scope="col">Destreza</th>
+                        <th scope="col">Poder</th>
+                        <th scope="col">Combate</th>
+                        <th scope="col">Defesa</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <th scope="row">{{mutante.nome}}</th>
+                        <td>{{mutante.alinhamento}}</td>
+                        <td>{{mutante.inteligencia}}</td>
+                        <td>{{mutante.forca}}</td>
+                        <td>{{mutante.destreza}}</td>
+                        <td>{{mutante.poder}}</td>
+                        <td>{{mutante.combate}}</td>
+                        <td>{{mutante.defesa}}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+
+          </div>
+
+
