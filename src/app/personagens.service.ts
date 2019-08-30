@@ -29,4 +29,10 @@ public criarMutante(partida : Partida)  : Observable<any>{
         return response;
     }))
 }
+public salvarMutante(partida : Partida)  : Observable<any>{
+    return this.http.post(`${URL_API}/heroi-stefanini/herois/mutanteplus`,(partida)).pipe(map((response:any)=>{
+        console.log(response)
+        return response;
+    }))
+}
 }

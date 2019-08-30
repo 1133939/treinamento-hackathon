@@ -4,9 +4,9 @@
 </div>
 <div class="espaco-button" *ngIf="partida.duelos != null">
         <button type="button" class="btn btn-info" (click)="fazerJogada()">Próximo Duelo</button>
-        <button *ngIf="criarMutanteBoolean" type="button" class="btn btn-warning" (click)="criarMutante()">Criar Mutante</button>
+        <button *ngIf="criarMutanteBoolean" type="button" class="btn btn-warning" data-toggle="modal" data-target="#criarMutante">Criar Mutante</button>
     </div>
-
+<div *ngIf="partida.duelos!=null">
 <table class="table table-striped">
         <thead>
           <tr>
@@ -20,15 +20,24 @@
         <tbody>
           <tr *ngFor="let duelo of partida.duelos; let i = index">
             <th scope="row">{{i+1}}</th>
-            <td *ngFor="let p of duelo.personagens">{{p.nome}}</td>
+            <td *ngFor="let p of duelo.personagens">{{p.nome}}
+              <p class="left" *ngIf="duelo.atributo=='inteligencia'">({{p.inteligencia}})</p>
+              <p class="left" *ngIf="duelo.atributo=='poder'">({{p.poder}})</p>
+              <p class="left" *ngIf="duelo.atributo=='combate'">({{p.combate}})</p>
+              <p class="left" *ngIf="duelo.atributo=='defesa'">({{p.defesa}})</p>
+              <p class="left" *ngIf="duelo.atributo=='destreza'">({{p.destreza}})</p>
+              <p class="left" *ngIf="duelo.atributo=='forca'">({{p.forca}})</p>
+            </td>
             <td>{{duelo.atributo}}</td>
             <td>{{duelo.personagemVitorioso.nome}}</td>
           </tr>
         </tbody>
       </table>
-      <div class="mx-auto" *ngIf="mutante.nome!=null">
+
+      <div *ngIf="mutante.nome!=null">
+          <div class="d-flex justify-content-center">
             <p class="lead">Você criou um HEROI MUTANTEEE !!!!!!!</p>
-           
+           </div>
             <table class="table table-dark">
                     <thead>
                       <tr>
@@ -55,7 +64,41 @@
                       </tr>
                     </tbody>
                   </table>
-
           </div>
+        </div>
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="criarMutante" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Criando Mutante</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form  [formGroup]="form" (ngSubmit)="salvarMutante()">
+      <div class="modal-body">
+       
+          <div class="form-group row">
+            <label for="inputPassword" class="col-sm-2 col-form-label">Nome</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" formControlName="nome">
+              <p class="text-danger" *ngIf="!this.form.get('nome').valid && this.form.get('nome').touched">O nome deve conter entre 2 e 20 caracteres</p>
+            </div>
+          </div>
+          
+          
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+          <button type="submit" class="btn btn-primary">Salvar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
 
 
