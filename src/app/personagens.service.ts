@@ -10,27 +10,10 @@ export class PersonagemService{
 constructor(private http : HttpClient){
 
 }
-public getRandomDuelo()  : Observable<any>{
-    return this.http.get(`${URL_API}/heroi-stefanini/herois/duelo`).pipe(map((response:any)=>{
-        console.log(response)
-        return response;
-    }))
-}
 
-public fazerJogada(partida : Partida)  : Observable<any>{
-    return this.http.post(`${URL_API}/heroi-stefanini/herois/jogadas`,(partida)).pipe(map((response:any)=>{
-        console.log(response)
-        return response;
-    }))
-}
+
 public criarMutante(partida : Partida)  : Observable<any>{
-    return this.http.post(`${URL_API}/heroi-stefanini/herois/mutante`,(partida)).pipe(map((response:any)=>{
-        console.log(response)
-        return response;
-    }))
-}
-public salvarMutante(partida : Partida)  : Observable<any>{
-    return this.http.post(`${URL_API}/heroi-stefanini/herois/mutanteplus`,(partida)).pipe(map((response:any)=>{
+    return this.http.post(`${URL_API}/heroi-stefanini/personagem/mutante`,(partida)).pipe(map((response:any)=>{
         console.log(response)
         return response;
     }))

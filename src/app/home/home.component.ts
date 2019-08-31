@@ -3,12 +3,13 @@ import { Partida } from '../model/partida.model';
 import { Duelo } from '../model/duelo.model';
 import { PersonagemService } from '../personagens.service';
 import { PersonagemDto } from '../model/personagemDto.model';
+import { DueloService } from '../duelo.service';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
-  providers:[PersonagemService]
+  providers:[DueloService]
 })
 export class HomeComponent implements OnInit {
   public partida : Partida = new Partida(null,null,null);
@@ -16,7 +17,7 @@ export class HomeComponent implements OnInit {
   public personagemVitorioso : PersonagemDto
   public mostrarHabilidade : boolean = false;
   public randomPersonagem : boolean = false;
-  constructor(private service : PersonagemService) { }
+  constructor(private service : DueloService) { }
 
   ngOnInit() {
   }

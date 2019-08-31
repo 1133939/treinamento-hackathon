@@ -3,12 +3,13 @@ import { PersonagemService } from '../personagens.service';
 import { Partida } from '../model/partida.model';
 import { PersonagemDto } from '../model/personagemDto.model';
 import { FormGroup, Validators, FormControl } from '@angular/forms';
+import { PartidaService } from '../partida.service.';
 
 @Component({
   selector: 'app-criar-partida',
   templateUrl: './criar-partida.component.html',
   styleUrls: ['./criar-partida.component.css'],
-  providers:[PersonagemService]
+  providers:[PersonagemService, PartidaService]
 })
 export class CriarPartidaComponent implements OnInit {
   public partida : Partida = new Partida(null,null,null);
@@ -17,12 +18,12 @@ export class CriarPartidaComponent implements OnInit {
   public form : FormGroup = new FormGroup({
     'nome' : new FormControl(null,[Validators.required, Validators.minLength(2), Validators.maxLength(20)])
   })
-  constructor(private service : PersonagemService) { }
+  constructor(private personagemService : PersonagemService,private partidaService : PartidaService) { }
 
   ngOnInit() {
   }
   fazerJogada(){
-      this.service.fazerJogada(this.partida).subscribe((response:any)=>{
+      this.partidaService.fazerJogada(this.partida).subscribe((response:any)=>{
         this.partida=response;
         if(this.partida.duelos.length==10){
           this.criarMutanteBoolean = true;
@@ -31,19 +32,19 @@ export class CriarPartidaComponent implements OnInit {
       })
 
   }
-  criarMutante(){
-    this.service.criarMutante(this.partida).subscribe((response:any)=>{
-      this.mutante=response;
-      console.log(this.mutante)
-      this.criarMutanteBoolean = false;
-    })
-  }
+  // criarMutante(){
+  //   this.service.criarMutante(this.partida).subscribe((response:any)=>{
+  //     this.mutante=response;
+  //     console.log(this.mutante)
+  //     this.criarMutanteBoolean = false;
+  //   })
+  // }
 
   salvarMutante(){
     this.form.get('nome').markAsTouched()
     if(this.form.valid){
     this.partida.heroiQueMaisVenceu.nome=this.form.get('nome').value
-    this.service.criarMutante(this.partida).subscribe((response:any)=>{
+    this.personagemService.criarMutante(this.partida).subscribe((response:any)=>{
       this.mutante=response;
       console.log(this.mutante)
       this.criarMutanteBoolean = false;
